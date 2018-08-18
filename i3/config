@@ -34,7 +34,7 @@ bindsym $mod +Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 
 # start rofi (a program launcher)
-bindsym $mod+space exec rofi -show drun
+bindsym $mod+space exec "rofi -theme-str '#prompt { enabled: false; }' -show drun"
 
 # change focus
 bindsym $mod+Left focus left

@@ -75,7 +75,7 @@ cursor-click = pointer
 ;************************************************************
 modules-left = i3 spotify 
 modules-center = date status_bar
-modules-right = backlight pulseaudio battery time powermenu
+modules-right = backlight pulseaudio battery time power_menu
 ;************************************************************
 
 [module/spotify]
@@ -100,7 +100,7 @@ type = internal/backlight
 card = intel_backlight
 
 format = <label> <bar>
-label = BL
+label = 
 
 bar-width = 10
 bar-indicator = |
@@ -147,7 +147,7 @@ label-disconnected-foreground = ${colors.foreground-alt}
 type = internal/pulseaudio
 
 format-volume = <label-volume> <bar-volume>
-label-volume = VOL %percentage%%
+label-volume =  %percentage%%
 label-volume-foreground = ${root.foreground}
 
 label-muted = 🔇 muted
@@ -227,17 +227,26 @@ ramp-2 =
 ramp-foreground = ${colors.foreground-alt}
 
 [module/date]
-type = internal/date
+;type = internal/date
+;interval = 5
+;date = %a %b %d %Y
+
+;format-prefix =
+;format-prefix-foreground = ${colors.soft-white}
+;format-underline = ${colors.soft-white}
+
+;label = %date%
+;label-foreground = ${colors.soft-white}
+;click-left = gsimplecal
+
+type = custom/script
 interval = 5
-date = %a %b %d %Y
-
-format-prefix =
-format-prefix-foreground = ${colors.soft-white}
+format = <label>
+format-forground = ${colors.soft-white}
+exec = date '+%a %b %_d %Y' 
 format-underline = ${colors.soft-white}
+click-left = gsimplecal
 
-
-label = %date%
-label-foreground = ${colors.soft-white}
 
 [module/time]
 type = internal/date
@@ -279,6 +288,14 @@ menu-2-0 = power off
 menu-2-0-exec = sudo poweroff
 menu-2-1 = cancel
 menu-2-1-exec = menu-open-0
+
+[module/power_menu]
+type = custom/script
+interval = 5
+format = <label>
+exec = echo %{F#A4A4A4} 
+format-forground = ${colors.soft-white}
+click-left = ~/dotfiles/rofi/power_menu.sh
 
 [settings]
 screenchange-reload = true
@@ -322,6 +339,7 @@ type = internal/i3
 format = <label-state> <label-mode>
 index-sort = true
 wrapping-scroll = false
+strip-wsnumbers = true
 
 ; Only show workspaces on the same output as the bar
 ;pin-workspaces = true

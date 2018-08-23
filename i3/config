@@ -8,6 +8,8 @@ exec_always compton -f
 #exec ~/.screenlayout/default.sh
 exec_always feh --bg-scale /home/bilal/Pictures/turkey.jpg
 exec --no-startup-id dropbox start
+exec_always eval "$(ssh-agent -s)"
+exec_always ssh-add ~/.ssh/id_github_rsa
 
 # i3-gaps
 for_window [class="^.*"] border pixel 0
@@ -127,7 +129,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+E exec ~/dotfiles/i3/scripts/i3-exit
+bindsym $mod+Shift+E exec ~/dotfiles/rofi/power_menu.sh
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -181,7 +183,7 @@ hide_edge_borders both
 	#}
 #}
 
-exec_always --no-startup-id ~/dotfiles/i3/script/launch_bar.sh
+exec_always --no-startup-id ~/dotfiles/i3/scripts/launch_bar.sh
 
 # Screen brightness controls with notification
 bindsym XF86MonBrightnessUp exec light -A 5 ; exec pkill -SIGRTMIN+9 i3blocks
@@ -217,14 +219,15 @@ for_window [class="Yad"] floating enable
 bindsym --release Shift+Print exec scrot -s 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/screenshots/`ls -1 -t ~/Pictures/screenshots | head -1`' # Area selection
 
 # POWER MENU
-set $sysmenu "system:  [s]leep  [l]ogout  sh[u]tdown  [r]eboot"
-bindsym $mod+Delete      mode $sysmenu
-
-mode $sysmenu {
-    bindsym s         exec systemctl suspend && i3lock -c 000000 ; mode "default"
-    bindsym l         exit ; mode "default"
-    bindsym u         exec shutdown -P now ; mode "default"
-    bindsym r         exec shutdown -r now ; mode "default"
-    bindsym Return    mode "default" 
-    bindsym Escape    mode "default"
-}
+#bindsym $mod+Delete exec ~/dotfiles/rofi/power_menu.sh
+#set $sysmenu "system:  [s]leep  [l]ogout  sh[u]tdown  [r]eboot"
+#bindsym $mod+Delete      mode $sysmenu
+#
+#mode $sysmenu {
+#    bindsym s         exec systemctl suspend && i3lock -c 000000 ; mode "default"
+#    bindsym l         exit ; mode "default"
+#    bindsym u         exec shutdown -P now ; mode "default"
+#    bindsym r         exec shutdown -r now ; mode "default"
+#    bindsym Return    mode "default" 
+#    bindsym Escape    mode "default"
+#}

@@ -227,21 +227,9 @@ ramp-2 =
 ramp-foreground = ${colors.foreground-alt}
 
 [module/date]
-;type = internal/date
-;interval = 5
-;date = %a %b %d %Y
-
-;format-prefix =
-;format-prefix-foreground = ${colors.soft-white}
-;format-underline = ${colors.soft-white}
-
-;label = %date%
-;label-foreground = ${colors.soft-white}
-;click-left = gsimplecal
-
 type = custom/script
 interval = 5
-format = <label>
+format = %{F#A4A4A4}<label>
 format-forground = ${colors.soft-white}
 exec = date '+%a %b %_d %Y' 
 format-underline = ${colors.soft-white}
